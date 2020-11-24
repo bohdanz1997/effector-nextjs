@@ -1,12 +1,13 @@
 import React from 'react'
 import Link from 'next/link'
+import { GetServerSideProps } from 'next'
 import styled from 'styled-components'
 import { useEvent, useStore } from 'effector-react/ssr'
 import * as model from '../model/user'
 import { allSettled, fork, serialize } from 'effector/fork'
 import { app } from '../model/app'
 
-export const getServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const scope = fork(app)
   await allSettled(model.fetchUserFx, { scope })
   await allSettled(model.inc, { scope })
@@ -33,9 +34,9 @@ export default function Dashboard() {
       <div>
         counter: {counter}
       </div>
-      <button onClick={inc}>Increment</button>
-      <button onClick={dec}>Decrement</button>
-      <button onClick={reset}>Reset</button>
+      <button onClick={() => inc()}>Increment</button>
+      <button onClick={() => dec()}>Decrement</button>
+      <button onClick={() => reset()}>Reset</button>
       {userLoading ? (
         <div>User is loading</div>
       ) : (
