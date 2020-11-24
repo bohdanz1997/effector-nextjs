@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 import styled from 'styled-components'
 import { useEvent, useStore } from 'effector-react/ssr'
 import * as model from '../model/user'
@@ -28,6 +29,7 @@ export default function Dashboard() {
   return (
     <div>
       <Title>EFFECTOR & STYLED COMPONENTS & NEXT.JS</Title>
+      <Link href="/about">To About</Link>
       <div>
         counter: {counter}
       </div>
