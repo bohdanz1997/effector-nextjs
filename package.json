@@ -17,10 +17,18 @@
     "styled-normalize": "^8.0.7"
   },
   "devDependencies": {
+    "@eslint-kit/eslint-config-base": "^2.1.2",
+    "@eslint-kit/eslint-config-node": "^2.0.0",
+    "@eslint-kit/eslint-config-prettier": "^2.0.0",
+    "@eslint-kit/eslint-config-react": "^2.0.0",
+    "@eslint-kit/eslint-config-typescript": "^3.1.2",
     "@types/node": "^14.14.9",
     "@types/react": "^17.0.0",
     "@types/styled-components": "^5.1.4",
+    "@typescript-eslint/parser": "^4.8.2",
     "babel-plugin-styled-components": "^1.12.0",
+    "eslint": "^7.14.0",
+    "prettier": "^2.2.0",
     "typescript": "^4.1.2"
   }
 }

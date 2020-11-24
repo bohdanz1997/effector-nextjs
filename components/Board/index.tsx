@@ -8,9 +8,7 @@ import { $cards } from '../../models/board'
 import { AddCard } from './AddCard'
 
 export const Board: React.FC = () => {
-  const cards = useList($cards, (card) => (
-    <Card title={card.title} />
-  ))
+  const cards = useList($cards, (card) => <Card title={card.title} />)
 
   return (
     <Main>
@@ -20,9 +18,7 @@ export const Board: React.FC = () => {
           <AddCard />
         </List>
         <ListWrapper>
-          <AddButton>
-            Add Column
-          </AddButton>
+          <AddButton>Add Column</AddButton>
         </ListWrapper>
       </Container>
     </Main>
@@ -39,5 +35,3 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
 `
-
-

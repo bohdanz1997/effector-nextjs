@@ -1,4 +1,4 @@
-import {createDomain} from 'effector'
+import { createDomain } from 'effector'
 import { createGate } from 'effector-react'
 
 export const app = createDomain()
