@@ -10,8 +10,8 @@ export const getServerSideProps: GetServerSideProps = async () => {
 
   return {
     props: {
-      store: serialize(scope)
-    }
+      store: serialize(scope),
+    },
   }
 }
 

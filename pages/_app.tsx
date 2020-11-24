@@ -34,7 +34,7 @@ export default function App({ Component, pageProps }: AppProps) {
         values: {
           ...pageProps.store,
           ...serializeDiff(app, currentScope),
-        }
+        },
       })
     } else {
       scope = fork(app, {

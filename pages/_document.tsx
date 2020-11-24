@@ -11,7 +11,7 @@ export default class DocumentPage extends Document {
         return originalRenderPage({
           enhanceApp: (App) => (props) => {
             return sheet.collectStyles(<App {...props} />)
-          }
+          },
         })
       }
 
@@ -23,7 +23,7 @@ export default class DocumentPage extends Document {
             {initialProps.styles}
             {sheet.getStyleElement()}
           </>
-        )
+        ),
       }
     } finally {
       sheet.seal()

@@ -1,7 +1,7 @@
 export type Card = {
-  title: string,
+  title: string
 }
 
 export type List = {
-  title: string,
+  title: string
 }

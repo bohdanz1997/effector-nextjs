@@ -2,18 +2,14 @@ import React from 'react'
 import styled from 'styled-components'
 
 type Props = {
-  title: React.ReactNode,
+  title: React.ReactNode
 }
 
 export const List: React.FC<Props> = ({ children, title }) => {
   return (
     <Container>
-      <Title>
-        {title}
-      </Title>
-      <Content>
-        {children}
-      </Content>
+      <Title>{title}</Title>
+      <Content>{children}</Content>
     </Container>
   )
 }

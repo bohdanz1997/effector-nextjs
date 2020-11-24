@@ -22,9 +22,7 @@ export const AddCard = () => {
           onKeyPress={(e) => keyPressed(e.key)}
         />
       ) : (
-        <AddButton onClick={() => buttonClicked()}>
-          Add Card
-        </AddButton>
+        <AddButton onClick={() => buttonClicked()}>Add Card</AddButton>
       )}
     </Container>
   )
@@ -38,11 +36,13 @@ const enterPressed = keyPressed.filter({
   fn: (key) => key === 'Enter',
 })
 
-const $isEditing = app.createStore<boolean>(false)
+const $isEditing = app
+  .createStore<boolean>(false)
   .on(buttonClicked, () => true)
   .on(enterPressed, () => false)
 
-const $title = app.createStore<string>('')
+const $title = app
+  .createStore<string>('')
   .on(titleChanged, (_, title) => title)
   .reset(addCard)
 
