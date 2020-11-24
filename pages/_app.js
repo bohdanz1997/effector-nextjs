@@ -1,7 +1,9 @@
 import '../styles/globals.css'
+import { ThemeProvider } from 'styled-components'
 import { Provider as EffectorProvider } from 'effector-react/ssr'
 import { fork, serialize } from 'effector/fork'
 import { app } from '../model/app'
+import { GlobalStyles, theme } from './global-styles'
 
 const isBrowser = () => typeof window !== 'undefined'
 
@@ -45,7 +47,10 @@ export default function App({ Component, pageProps }) {
 
   return (
     <EffectorProvider value={scope}>
-      <Component {...pageProps} />
+      <GlobalStyles />
+      <ThemeProvider theme={theme}>
+        <Component {...pageProps} />
+      </ThemeProvider>
     </EffectorProvider>
   )
 }

@@ -1,4 +1,5 @@
 import React from 'react'
+import styled from 'styled-components'
 import { useEvent, useStore } from 'effector-react/ssr'
 import * as model from '../model/user'
 import { allSettled, fork, serialize } from 'effector/fork'
@@ -26,6 +27,7 @@ export default function Dashboard() {
 
   return (
     <div>
+      <Title>EFFECTOR & STYLED COMPONENTS & NEXT.JS</Title>
       <div>
         counter: {counter}
       </div>
@@ -44,3 +46,8 @@ export default function Dashboard() {
     </div>
   )
 }
+
+const Title = styled.h1`
+  font-size: 50px;
+  color: ${p => p.theme.colors.primary};
+`
