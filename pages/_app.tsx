@@ -1,10 +1,11 @@
-import '../styles/globals.css'
+import '../models/init'
 import { AppProps } from 'next/app'
 import { ThemeProvider } from 'styled-components'
+import { Normalize } from 'styled-normalize'
 import { Provider as EffectorProvider } from 'effector-react/ssr'
 import { Domain } from 'effector'
 import { Scope, fork, serialize } from 'effector/fork'
-import { app } from '../model/app'
+import { app } from '../models/app'
 import { GlobalStyles, theme } from './global-styles'
 
 const isBrowser = () => typeof window !== 'undefined'
@@ -49,6 +50,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <EffectorProvider value={scope}>
+      <Normalize />
       <GlobalStyles />
       <ThemeProvider theme={theme}>
         <Component {...pageProps} />
