@@ -1,10 +1,11 @@
 import * as React from 'react'
 import styled from 'styled-components'
-import { List, ListWrapper } from './List'
+import { useList } from 'effector-react'
+import { $cards } from 'models/board'
+
 import { Card } from '../Card/Card'
 import { AddButton } from '../Button/AddButton'
-import { useList } from 'effector-react'
-import { $cards } from '../../models/board'
+import { List, ListWrapper } from './List'
 import { AddCard } from './AddCard'
 
 export const Board: React.FC = () => {

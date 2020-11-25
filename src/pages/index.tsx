@@ -2,7 +2,7 @@ import React from 'react'
 import { GetServerSideProps } from 'next'
 import { fork, serialize } from 'effector/fork'
 import { app } from 'models/app'
-import { Board } from '../components/Board'
+import { Board } from 'components/Board'
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const scope = fork(app)

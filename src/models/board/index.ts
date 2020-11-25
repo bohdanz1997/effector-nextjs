@@ -1,5 +1,5 @@
-import { Card } from './types'
 import { app } from '../app'
+import { Card } from './types'
 
 export const $cards = app.createStore<Card[]>([])
 

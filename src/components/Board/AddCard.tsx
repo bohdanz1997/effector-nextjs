@@ -1,9 +1,9 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import { useStore } from 'effector-react'
+import { $isEditing, $title, buttonClicked, keyPressed, titleChanged } from 'models/add-card'
 
 import { AddButton } from '../Button/AddButton'
-import { $isEditing, $title, buttonClicked, keyPressed, titleChanged } from '../../models/add-card'
 
 export const AddCard = () => {
   const isEditing = useStore($isEditing)
