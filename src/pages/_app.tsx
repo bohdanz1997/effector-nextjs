@@ -19,7 +19,7 @@ const serializeDiff = (app: Domain, scope: Scope) => {
     let needIgnore = true
     try {
       needIgnore = scope.getState(store) === store.defaultState
-    } catch (err) {}
+    } catch (error) {}
     if (needIgnore) {
       ignore.push(store)
     }
