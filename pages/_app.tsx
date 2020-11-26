@@ -6,7 +6,7 @@ import { Provider as EffectorProvider } from 'effector-react/ssr'
 import { Domain } from 'effector'
 import { Scope, fork, serialize } from 'effector/fork'
 import { app } from '../models/app'
-import { GlobalStyles, theme } from './global-styles'
+import { GlobalStyles, theme } from '../components/global-styles'
 
 const isBrowser = () => typeof window !== 'undefined'
 
