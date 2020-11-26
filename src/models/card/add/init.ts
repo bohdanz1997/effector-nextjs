@@ -1,20 +1,40 @@
-import { sample } from 'effector'
+import { combine, guard, sample } from 'effector'
+import { uuid } from 'lib/uuid'
+
 import { addCard } from '../../cards'
 import {
   $isEditing,
+  $activeListId,
   $title,
-  buttonClicked,
   enterPressed,
+  startAddingCard,
   titleChanged,
 } from './index'
 
-$isEditing.on(buttonClicked, () => true).on(enterPressed, () => false)
+$isEditing.on(startAddingCard, () => true).on(enterPressed, () => false)
 
 $title.on(titleChanged, (_, title) => title).reset(addCard)
 
+guard({
+  source: startAddingCard.map(({ listId }) => listId),
+  filter: Boolean,
+  target: $activeListId,
+})
+
+const $addingCard = combine(
+  {
+    title: $title,
+    listId: $activeListId,
+  },
+  ({ title, listId }) => ({
+    id: uuid(),
+    title,
+    listId,
+  }),
+)
+
 sample({
-  source: $title,
+  source: $addingCard,
   clock: enterPressed,
-  fn: (title) => ({ title }),
   target: addCard,
 })
