@@ -5,8 +5,8 @@ import {
   $isEditing,
   $title,
   buttonClicked,
-  keyPressed,
-  titleChanged,
+  titleInputChanged,
+  titleInputKeyPressed,
 } from 'models/card/add'
 
 import { AddButton } from '../Button/AddButton'
@@ -22,8 +22,8 @@ export const AddCard = () => {
           autoFocus
           type="text"
           value={title}
-          onChange={(e) => titleChanged(e.target.value)}
-          onKeyPress={(e) => keyPressed(e.key)}
+          onChange={titleInputChanged}
+          onKeyPress={titleInputKeyPressed}
         />
       ) : (
         <AddButton onClick={() => buttonClicked()}>Add Card</AddButton>
