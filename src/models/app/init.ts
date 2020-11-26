@@ -1,6 +1,6 @@
 import { forward } from 'effector'
 
-import { app, AppGate } from 'models/app/index'
+import { app, AppGate } from './index'
 
 forward({
   from: AppGate.open,

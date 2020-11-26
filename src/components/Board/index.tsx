@@ -1,11 +1,12 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import { useList } from 'effector-react'
-import { List, ListWrapper } from 'components/Board/List'
-import { Card } from 'components/Card/Card'
-import { AddButton } from 'components/Button/AddButton'
-import { $cards } from 'models/board'
-import { AddCard } from 'components/Board/AddCard'
+import { $cards } from 'models/cards'
+
+import { Card } from '../Card/Card'
+import { AddButton } from '../Button/AddButton'
+import { List, ListWrapper } from './List'
+import { AddCard } from './AddCard'
 
 export const Board: React.FC = () => {
   const cards = useList($cards, (card) => <Card title={card.title} />)

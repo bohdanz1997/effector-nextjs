@@ -1,5 +1,5 @@
-import { app } from 'models/app'
-import { Card } from 'models/board/types'
+import { app } from '../app'
+import { Card } from './types'
 
 export const $cards = app.createStore<Card[]>([])
 
