@@ -1,4 +1,4 @@
-import '../models/init'
+import 'models/init'
 import { AppProps } from 'next/app'
 import { ThemeProvider } from 'styled-components'
 import { Normalize } from 'styled-normalize'

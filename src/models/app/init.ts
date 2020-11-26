@@ -1,6 +1,6 @@
 import { forward } from 'effector'
 
-import { app, AppGate } from './'
+import { app, AppGate } from 'models/app/index'
 
 forward({
   from: AppGate.open,
@@ -8,8 +8,8 @@ forward({
 })
 
 app.onCreateEffect((fx) => {
-  fx.failData.watch((err) => {
+  fx.failData.watch((error) => {
     console.error(`Error in ${fx.shortName}`)
-    console.error(err)
+    console.error(error)
   })
 })

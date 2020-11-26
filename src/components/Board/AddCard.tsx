@@ -3,9 +3,9 @@ import styled from 'styled-components'
 import { useStore } from 'effector-react'
 import { sample } from 'effector'
 
-import { AddButton } from '../Button/AddButton'
-import { addCard } from '../../models/board'
-import { app } from '../../models/app'
+import { AddButton } from 'components/Button/AddButton'
+import { addCard } from 'models/board'
+import { app } from 'models/app'
 
 export const AddCard = () => {
   const isEditing = useStore($isEditing)
