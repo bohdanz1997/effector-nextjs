@@ -1,10 +1,9 @@
 import React from 'react'
 import { app } from '../../app'
-import { CardAddParams } from './types'
 
 export const keyPressed = app.createEvent<string>()
 export const titleChanged = app.createEvent<string>()
-export const startAddingCard = app.createEvent<CardAddParams>()
+export const setActiveListId = app.createEvent<number>()
 
 export const titleInputChanged = titleChanged.prepend(
   (e: React.ChangeEvent<HTMLInputElement>) => e.target.value,

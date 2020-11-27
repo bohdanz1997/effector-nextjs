@@ -8,7 +8,7 @@ type Props = {
 export const List: React.FC<Props> = ({ children, title }) => {
   return (
     <Container>
-      <Title>{title}</Title>
+      {title}
       <Content>{children}</Content>
     </Container>
   )
@@ -23,15 +23,6 @@ const Container = styled(ListWrapper)`
   border-radius: var(--border-radius);
   background-color: #ebecf0;
   height: 100%;
-`
-
-const Title = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: var(--p2);
-  font-size: var(--font-size4);
-  font-weight: bold;
 `
 
 const Content = styled.div`

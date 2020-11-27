@@ -7,19 +7,15 @@ import {
   $activeListId,
   $title,
   enterPressed,
-  startAddingCard,
+  setActiveListId,
   titleChanged,
 } from './index'
 
-$isEditing.on(startAddingCard, () => true).on(enterPressed, () => false)
+$isEditing.on(setActiveListId, () => true).on(enterPressed, () => false)
 
 $title.on(titleChanged, (_, title) => title).reset(addCard)
 
-guard({
-  source: startAddingCard.map(({ listId }) => listId),
-  filter: Boolean,
-  target: $activeListId,
-})
+$activeListId.on(setActiveListId, (_, listId) => listId)
 
 const $addingCard = combine(
   {

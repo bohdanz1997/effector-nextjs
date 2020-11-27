@@ -1,18 +1,33 @@
 import * as React from 'react'
 import styled from 'styled-components'
-import { useList } from 'effector-react'
+import { useEvent, useList } from 'effector-react/ssr'
 import { combine } from 'effector'
-import { $cards, Card } from 'models/cards'
+
+import { $cards } from 'models/cards'
 import { $lists } from 'models/lists'
 
-import { CardView } from '../Card/Card'
+import { boardClicked } from 'models/board'
+import { CardView } from './Card'
 import { List, ListWrapper } from './List'
 import { AddCard } from './AddCard'
 import { AddList } from './AddList'
+import { EditableListTitle } from './EditableListTitle'
 
 export const Board: React.FC = () => {
+  const events = useEvent({
+    boardClicked,
+  })
+  const mainRef = React.useRef<HTMLDivElement>(null)
+
   return (
-    <Main>
+    <Main
+      ref={mainRef}
+      onClick={(event) => {
+        if (mainRef.current && event.target === mainRef.current) {
+          events.boardClicked()
+        }
+      }}
+    >
       <Container>
         <ListsWithCards />
         <ListWrapper>
@@ -24,26 +39,15 @@ export const Board: React.FC = () => {
 }
 
 const ListsWithCards = () => {
-  return useList($listsWithCards, {
-    fn: (list) => (
-      <List title={list.title}>
-        {list.cards.map((card) => (
-          <CardView title={card.title} key={card.id} />
-        ))}
-        <AddCard listId={list.id} />
-      </List>
-    ),
-  })
+  return useList($listsWithCards, (list) => (
+    <List title={<EditableListTitle id={list.id} title={list.title} />}>
+      {list.cards.map((card) => (
+        <CardView title={card.title} key={card.id} />
+      ))}
+      <AddCard listId={list.id} />
+    </List>
+  ))
 }
-
-type CardsById = { [id: number]: Card }
-
-const $cardsById = $cards.map((cards) =>
-  cards.reduce((byId, card) => {
-    byId[card.id] = card
-    return card
-  }, {} as CardsById),
-)
 
 const $listsWithCards = combine($lists, $cards, (lists, cards) =>
   lists.map((list) => ({

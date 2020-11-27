@@ -1,11 +1,11 @@
 import * as React from 'react'
 import styled from 'styled-components'
-import { useStore } from 'effector-react'
+import { useStore } from 'effector-react/ssr'
 import {
   $activeListId,
   $isEditing,
   $title,
-  startAddingCard,
+  setActiveListId,
   titleInputChanged,
   titleInputKeyPressed,
 } from 'models/card/add'
@@ -34,9 +34,7 @@ export const AddCard: React.FC<Props> = ({ listId }) => {
           onKeyPress={titleInputKeyPressed}
         />
       ) : (
-        <AddButton onClick={() => startAddingCard({ listId })}>
-          Add Card
-        </AddButton>
+        <AddButton onClick={() => setActiveListId(listId)}>Add Card</AddButton>
       )}
     </Container>
   )

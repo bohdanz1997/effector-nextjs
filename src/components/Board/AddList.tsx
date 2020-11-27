@@ -1,32 +1,43 @@
 import * as React from 'react'
-import { useStore } from 'effector-react'
+import { useEvent, useStore } from 'effector-react/ssr'
 import {
+  $currentId,
   $isEditing,
   $title,
-  buttonClicked,
+  addButtonClicked,
   titleInputChanged,
   titleInputKeyPressed,
-} from 'models/list/add'
+} from 'models/list'
 
 import { AddButton } from '../Button/AddButton'
 import { Input } from '../Input'
 
 export const AddList = () => {
+  const events = useEvent({
+    addButtonClicked,
+    titleInputChanged,
+    titleInputKeyPressed,
+  })
   const isEditing = useStore($isEditing)
+  const currentId = useStore($currentId)
   const title = useStore($title)
+
+  const showInput = isEditing && currentId === 0
 
   return (
     <>
-      {isEditing ? (
+      {showInput ? (
         <Input
           autoFocus
           type="text"
           value={title}
-          onChange={titleInputChanged}
-          onKeyPress={titleInputKeyPressed}
+          onChange={events.titleInputChanged}
+          onKeyPress={events.titleInputKeyPressed}
         />
       ) : (
-        <AddButton onClick={() => buttonClicked()}>Add another list</AddButton>
+        <AddButton onClick={() => events.addButtonClicked()}>
+          Add another list
+        </AddButton>
       )}
     </>
   )
