@@ -1,5 +1,4 @@
 import React from 'react'
-import styled from 'styled-components'
 import { useEvent, useStore } from 'effector-react/ssr'
 import {
   $currentId,
@@ -11,6 +10,7 @@ import {
 } from 'models/list'
 
 import { Input } from '../Input'
+import { Title, TitleText } from './List'
 
 type Props = {
   id: number
@@ -29,24 +29,19 @@ export const EditableListTitle = ({ id, title }: Props) => {
 
   const showInput = isEditing && currentId === id
 
-  return showInput ? (
-    <Input
-      autoFocus
-      type="text"
-      value={titleValue}
-      onChange={events.titleInputChanged}
-      onKeyPress={events.titleInputKeyPressed}
-    />
-  ) : (
-    <Title onClick={() => events.titleClicked(id)}>{title}</Title>
+  return (
+    <Title onClick={() => events.titleClicked(id)}>
+      {showInput ? (
+        <Input
+          autoFocus
+          type="text"
+          value={titleValue}
+          onChange={events.titleInputChanged}
+          onKeyPress={events.titleInputKeyPressed}
+        />
+      ) : (
+        <TitleText>{title}</TitleText>
+      )}
+    </Title>
   )
 }
-
-const Title = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: var(--p2);
-  font-size: var(--font-size4);
-  font-weight: bold;
-`

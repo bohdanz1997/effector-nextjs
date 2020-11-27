@@ -29,3 +29,14 @@ const Content = styled.div`
   padding: 0 var(--p2);
   font-size: var(--font-size3);
 `
+
+export const Title = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--p2);
+  font-size: var(--font-size4);
+  font-weight: bold;
+`
+
+export const TitleText = styled.span``
