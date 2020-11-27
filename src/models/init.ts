@@ -1,5 +1,5 @@
 import './app/init'
 import './cards/init'
-import './card/add'
-import './lists'
-import './list/add'
+import './card/add/init'
+import './lists/init'
+import './list/add/init'
