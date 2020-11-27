@@ -5,7 +5,7 @@ type Props = {
   title: React.ReactNode
 }
 
-export const Card: React.FC<Props> = ({ children, title }) => {
+export const CardView: React.FC<Props> = ({ children, title }) => {
   return (
     <Container>
       <Title>{title}</Title>

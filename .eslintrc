@@ -18,7 +18,6 @@
     }
   },
   "rules": {
-    "react/react-in-jsx-scope": "off",
     "import/order": [
       "warn",
       {
@@ -31,6 +30,9 @@
           "index"
         ]
       }
-    ]
+    ],
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-props-no-spreading": "off",
+    "@typescript-eslint/consistent-type-definitions": "off"
   }
 }

@@ -1,4 +1,5 @@
 import './app/init'
-import './auth/init'
-import './board/init'
-import './add-card/init'
+import './cards/init'
+import './card/add'
+import './lists'
+import './list/add'
