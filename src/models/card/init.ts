@@ -3,6 +3,7 @@ import { uuid } from 'lib/uuid'
 import { boardClicked } from '../board'
 import { $cards, addCard, Card, removeCardById, updateCard } from '../cards'
 import * as listModel from '../list'
+import { app } from '../app'
 import {
   $currentId,
   $isEditing,
@@ -45,22 +46,34 @@ sample({
   target: $title,
 })
 
-const $createData = combine({
-  title: $title,
-  listId: listModel.$currentId,
-})
+const addNewCard = app.createEvent<{
+  id: number
+  title: string
+  listId: number | null
+}>()
 
-sample({
-  source: $createData,
-  clock: guard({
-    source: enterPressed,
-    filter: $isAdding.map(Boolean),
-  }),
-  fn: ({ title, listId }) => ({
+const $createCardData = combine(
+  $title,
+  listModel.$currentId,
+  (title, listId) => ({
     id: uuid(),
     title,
     listId,
   }),
+)
+
+sample({
+  source: $createCardData,
+  clock: guard({
+    source: enterPressed,
+    filter: $isAdding.map(Boolean),
+  }),
+  target: addNewCard,
+})
+
+guard({
+  source: addNewCard,
+  filter: listModel.$currentId.map(Boolean),
   target: addCard,
 })
 
