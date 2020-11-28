@@ -1,8 +1,5 @@
 import './app/init'
 import './cards/init'
-import './card/add/init'
 import './lists/init'
-import './list/add/init'
-import './list/edit/init'
 import './list/init'
 import './card/init'

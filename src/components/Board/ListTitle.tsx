@@ -1,45 +1,46 @@
-import { useEvent, useStore } from 'effector-react/ssr'
 import React from 'react'
+import { useEvent, useStore } from 'effector-react/ssr'
 import {
+  $currentId,
   $isEditing,
   $title,
-  $currentId,
-  titleClicked,
-  titleChanged,
-  keyPressed,
-} from 'models/card'
+  listClicked,
+  titleInputChanged,
+  titleInputKeyPressed,
+} from 'models/list'
+
 import { Input } from '../Input'
-import { Title } from './Card'
+import { Title, TitleText } from './List'
 
 type Props = {
   id: number
   title: string
 }
 
-export const EditableCardTitle = ({ id, title }: Props) => {
+export const ListTitle = ({ id, title }: Props) => {
   const isEditing = useStore($isEditing)
   const titleValue = useStore($title)
   const currentId = useStore($currentId)
   const events = useEvent({
-    titleClicked,
-    titleChanged,
-    keyPressed,
+    listClicked,
+    titleInputChanged,
+    titleInputKeyPressed,
   })
 
   const showInput = isEditing && currentId === id
 
   return (
-    <Title onClick={() => events.titleClicked(id)}>
+    <Title onClick={() => events.listClicked(id)}>
       {showInput ? (
         <Input
           autoFocus
           type="text"
           value={titleValue}
-          onChange={(e) => events.titleChanged(e.target.value)}
-          onKeyPress={(e) => events.keyPressed(e.key)}
+          onChange={events.titleInputChanged}
+          onKeyPress={events.titleInputKeyPressed}
         />
       ) : (
-        <>{title}</>
+        <TitleText>{title}</TitleText>
       )}
     </Title>
   )

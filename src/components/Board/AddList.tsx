@@ -1,9 +1,8 @@
 import * as React from 'react'
 import { useEvent, useStore } from 'effector-react/ssr'
 import {
-  $currentId,
-  $title,
   $isAdding,
+  $title,
   addButtonClicked,
   titleInputChanged,
   titleInputKeyPressed,
@@ -19,14 +18,11 @@ export const AddList = () => {
     titleInputKeyPressed,
   })
   const isAdding = useStore($isAdding)
-  const currentId = useStore($currentId)
   const title = useStore($title)
-
-  const showInput = isAdding && currentId === 0
 
   return (
     <>
-      {showInput ? (
+      {isAdding ? (
         <Input
           autoFocus
           type="text"

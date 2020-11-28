@@ -9,25 +9,22 @@ import {
   addButtonClicked,
   enterPressed,
   setCurrentId,
-  titleClicked,
+  cardClicked,
   $title,
   titleChanged,
   $isAdding,
 } from './index'
 
 $isAdding.on(addButtonClicked, () => true).reset(boardClicked, addCard)
-$isEditing.on(titleClicked, () => true).reset(boardClicked, updateCard)
+$isEditing.on(cardClicked, () => true).reset(boardClicked, updateCard)
 
 $currentId
-  .on([setCurrentId, titleClicked], (_, currentId) => currentId)
+  .on([setCurrentId, cardClicked], (_, currentId) => currentId)
   .reset(addCard, updateCard, removeCardById, boardClicked)
 
 $title
   .on(titleChanged, (_, title) => title)
   .reset(addCard, updateCard, removeCardById, boardClicked)
-
-$isAdding.watch((v) => console.log('card adding', v))
-$isEditing.watch((v) => console.log('card editing', v))
 
 const defaultCard: Card = {
   id: 0,
@@ -43,7 +40,7 @@ const $currentCard = combine(
 
 sample({
   source: $currentCard,
-  clock: titleClicked,
+  clock: cardClicked,
   fn: (card) => card.title,
   target: $title,
 })

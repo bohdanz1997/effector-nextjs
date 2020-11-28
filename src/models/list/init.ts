@@ -8,19 +8,22 @@ import {
   $currentId,
   $isAdding,
   $isEditing,
+  $mode,
   $title,
   addButtonClicked,
   enterPressed,
   setCurrentId,
   titleChanged,
-  titleClicked,
+  listClicked,
 } from './index'
 
-$isAdding.on(addButtonClicked, () => true).reset(boardClicked, addList)
-$isEditing.on(titleClicked, () => true).reset(boardClicked, updateList)
+$mode
+  .on(addButtonClicked, () => 'add')
+  .on(listClicked, () => 'edit')
+  .reset(boardClicked, addList, updateList)
 
 $currentId
-  .on([setCurrentId, titleClicked], (_, currentId) => currentId)
+  .on([setCurrentId, listClicked], (_, currentId) => currentId)
   .reset(addList, updateList, removeListById, boardClicked, cardsModel.addCard)
 
 $title
@@ -35,7 +38,7 @@ const $currentList = combine(
 
 sample({
   source: $currentList,
-  clock: titleClicked,
+  clock: listClicked,
   fn: (list) => (list ? list.title : ''),
   target: $title,
 })
@@ -44,7 +47,7 @@ sample({
   source: $title,
   clock: guard({
     source: enterPressed,
-    filter: $isAdding.map(Boolean),
+    filter: $isAdding,
   }),
   fn: (title) => ({
     id: uuid(),
@@ -62,7 +65,7 @@ sample({
   source: $updateData,
   clock: guard({
     source: enterPressed,
-    filter: $isEditing.map(Boolean),
+    filter: $isEditing,
   }),
   target: updateList,
 })

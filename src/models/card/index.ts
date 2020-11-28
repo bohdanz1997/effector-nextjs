@@ -2,7 +2,7 @@ import { app } from '../app'
 
 export const setCurrentId = app.createEvent<number>()
 export const addButtonClicked = app.createEvent<number>()
-export const titleClicked = app.createEvent<number>()
+export const cardClicked = app.createEvent<number>()
 export const titleChanged = app.createEvent<string>()
 export const keyPressed = app.createEvent<string>()
 export const enterPressed = keyPressed.filter({
