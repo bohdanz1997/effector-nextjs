@@ -1,17 +1,14 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import { useEvent, useList } from 'effector-react/ssr'
-import { combine } from 'effector'
+import { $listsWithCards, boardClicked } from 'models/board'
 
-import { $cards } from 'models/cards'
-import { $lists } from 'models/lists'
-
-import { boardClicked } from 'models/board'
 import { CardView } from './Card'
 import { List, ListWrapper } from './List'
 import { AddCard } from './AddCard'
 import { AddList } from './AddList'
 import { EditableListTitle } from './EditableListTitle'
+import { EditableCardTitle } from './EditableCardTitle'
 
 export const Board: React.FC = () => {
   const events = useEvent({
@@ -42,19 +39,15 @@ const ListsWithCards = () => {
   return useList($listsWithCards, (list) => (
     <List title={<EditableListTitle id={list.id} title={list.title} />}>
       {list.cards.map((card) => (
-        <CardView title={card.title} key={card.id} />
+        <CardView
+          key={card.id}
+          title={<EditableCardTitle id={card.id} title={card.title} />}
+        />
       ))}
       <AddCard listId={list.id} />
     </List>
   ))
 }
-
-const $listsWithCards = combine($lists, $cards, (lists, cards) =>
-  lists.map((list) => ({
-    ...list,
-    cards: cards.filter((card) => list.id === card.listId),
-  })),
-)
 
 const Main = styled.main`
   height: 100vh;

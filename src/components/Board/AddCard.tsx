@@ -1,14 +1,14 @@
 import * as React from 'react'
 import styled from 'styled-components'
-import { useStore } from 'effector-react/ssr'
+import { useEvent, useStore } from 'effector-react/ssr'
+import * as listModel from 'models/list'
 import {
-  $activeListId,
-  $isEditing,
   $title,
-  setActiveListId,
-  titleInputChanged,
-  titleInputKeyPressed,
-} from 'models/card/add'
+  titleChanged,
+  keyPressed,
+  $isAdding,
+  addButtonClicked,
+} from 'models/card'
 
 import { AddButton } from '../Button/AddButton'
 import { Input } from '../Input'
@@ -18,10 +18,16 @@ type Props = {
 }
 
 export const AddCard: React.FC<Props> = ({ listId }) => {
-  const isEditing = useStore($isEditing)
+  const events = useEvent({
+    titleChanged,
+    keyPressed,
+    addButtonClicked,
+  })
+  const isAdding = useStore($isAdding)
   const title = useStore($title)
-  const activeListId = useStore($activeListId)
-  const showInput = isEditing && activeListId === listId
+  const currentListId = useStore(listModel.$currentId)
+
+  const showInput = isAdding && currentListId === listId
 
   return (
     <Container>
@@ -30,11 +36,13 @@ export const AddCard: React.FC<Props> = ({ listId }) => {
           autoFocus
           type="text"
           value={title}
-          onChange={titleInputChanged}
-          onKeyPress={titleInputKeyPressed}
+          onChange={(e) => events.titleChanged(e.target.value)}
+          onKeyPress={(e) => events.keyPressed(e.key)}
         />
       ) : (
-        <AddButton onClick={() => setActiveListId(listId)}>Add Card</AddButton>
+        <AddButton onClick={() => events.addButtonClicked(listId)}>
+          Add Card
+        </AddButton>
       )}
     </Container>
   )

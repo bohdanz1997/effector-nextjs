@@ -3,8 +3,10 @@ import { uuid } from 'lib/uuid'
 
 import { $lists, addList, removeListById, updateList } from '../lists'
 import { boardClicked } from '../board'
+import * as cardsModel from '../cards'
 import {
   $currentId,
+  $isAdding,
   $isEditing,
   $title,
   addButtonClicked,
@@ -14,21 +16,16 @@ import {
   titleClicked,
 } from './index'
 
-$isEditing
-  .on(titleClicked, () => true)
-  .on(addButtonClicked, () => true)
-  .reset(boardClicked, enterPressed)
+$isAdding.on(addButtonClicked, () => true).reset(boardClicked, addList)
+$isEditing.on(titleClicked, () => true).reset(boardClicked, updateList)
 
 $currentId
   .on([setCurrentId, titleClicked], (_, currentId) => currentId)
-  .reset(addList, removeListById, boardClicked)
+  .reset(addList, updateList, removeListById, boardClicked, cardsModel.addCard)
 
 $title
   .on(titleChanged, (_, title) => title)
-  .reset(addList, removeListById, boardClicked)
-
-const $isEditMode = $currentId.map(Boolean)
-const $isCreateMode = $currentId.map((id) => !id)
+  .reset(addList, updateList, removeListById, boardClicked)
 
 const $currentList = combine(
   $lists,
@@ -47,7 +44,7 @@ sample({
   source: $title,
   clock: guard({
     source: enterPressed,
-    filter: $isCreateMode,
+    filter: $isAdding.map(Boolean),
   }),
   fn: (title) => ({
     id: uuid(),
@@ -56,14 +53,19 @@ sample({
   target: addList,
 })
 
+const $updateData = combine({
+  id: $currentId,
+  title: $title,
+})
+
 sample({
-  source: {
-    id: $currentId,
-    title: $title,
-  },
+  source: $updateData,
   clock: guard({
     source: enterPressed,
-    filter: $isEditMode,
+    filter: $isEditing.map(Boolean),
   }),
   target: updateList,
 })
+
+// $currentId.watch((v) => console.log('list currentID', v))
+// $isEditing.watch((v) => console.log('list editing', v))

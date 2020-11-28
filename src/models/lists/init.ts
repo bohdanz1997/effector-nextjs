@@ -1,4 +1,3 @@
-import { uuid } from 'lib/uuid'
 import { $lists, addList, removeListById, setLists, updateList } from './index'
 
 $lists
@@ -8,8 +7,3 @@ $lists
     lists.map((list) => (list.id === newList.id ? newList : list)),
   )
   .on(removeListById, (lists, id) => lists.filter((list) => list.id !== id))
-
-setLists([
-  { id: uuid(), title: 'TODO' },
-  { id: uuid(), title: 'In progress' },
-])

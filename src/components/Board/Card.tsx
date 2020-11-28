@@ -8,7 +8,7 @@ type Props = {
 export const CardView: React.FC<Props> = ({ children, title }) => {
   return (
     <Container>
-      <Title>{title}</Title>
+      {title}
       <Content>{children}</Content>
     </Container>
   )
@@ -27,7 +27,7 @@ const Container = styled.div`
   }
 `
 
-const Title = styled.div`
+export const Title = styled.div`
   padding: var(--p2);
   font-size: var(--font-size4);
 `

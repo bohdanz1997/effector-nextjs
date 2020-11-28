@@ -37,6 +37,7 @@ export const Title = styled.div`
   padding: var(--p2);
   font-size: var(--font-size4);
   font-weight: bold;
+  cursor: pointer;
 `
 
 export const TitleText = styled.span``

@@ -2,8 +2,8 @@ import * as React from 'react'
 import { useEvent, useStore } from 'effector-react/ssr'
 import {
   $currentId,
-  $isEditing,
   $title,
+  $isAdding,
   addButtonClicked,
   titleInputChanged,
   titleInputKeyPressed,
@@ -18,11 +18,11 @@ export const AddList = () => {
     titleInputChanged,
     titleInputKeyPressed,
   })
-  const isEditing = useStore($isEditing)
+  const isAdding = useStore($isAdding)
   const currentId = useStore($currentId)
   const title = useStore($title)
 
-  const showInput = isEditing && currentId === 0
+  const showInput = isAdding && currentId === 0
 
   return (
     <>
