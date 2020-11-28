@@ -2,9 +2,7 @@ import * as React from 'react'
 import styled from 'styled-components'
 import { useEvent } from 'effector-react/ssr'
 import { boardClicked } from 'models/board'
-import { ListWrapper } from './List'
-import { AddList } from './AddList'
-import { ListsWithCards } from './ListsWithCards'
+import { ListsWithCards, AddList } from '../List'
 
 export const Board: React.FC = () => {
   const events = useEvent({
@@ -23,9 +21,7 @@ export const Board: React.FC = () => {
     >
       <Container>
         <ListsWithCards />
-        <ListWrapper>
-          <AddList />
-        </ListWrapper>
+        <AddList />
       </Container>
     </Main>
   )

@@ -10,7 +10,7 @@ import {
   addButtonClicked,
 } from 'models/card'
 
-import { AddButton } from '../Button/AddButton'
+import { AddButton } from '../Button'
 import { Input } from '../Input'
 
 type Props = {

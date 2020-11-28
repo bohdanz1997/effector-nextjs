@@ -2,9 +2,8 @@ import * as React from 'react'
 import { useList } from 'effector-react/ssr'
 import { $listsWithCards } from 'models/board'
 
-import { CardView } from '../Card/CardView'
+import { CardView, AddCard } from '../Card'
 import { List } from './List'
-import { AddCard } from './AddCard'
 import { ListTitle } from './ListTitle'
 
 export const ListsWithCards = () =>

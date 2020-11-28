@@ -8,8 +8,9 @@ import {
   titleInputKeyPressed,
 } from 'models/list'
 
-import { AddButton } from '../Button/AddButton'
+import { AddButton } from '../Button'
 import { Input } from '../Input'
+import { ListWrapper } from './List'
 
 export const AddList = () => {
   const events = useEvent({
@@ -21,7 +22,7 @@ export const AddList = () => {
   const title = useStore($title)
 
   return (
-    <>
+    <ListWrapper>
       {isAdding ? (
         <Input
           autoFocus
@@ -35,6 +36,6 @@ export const AddList = () => {
           Add another list
         </AddButton>
       )}
-    </>
+    </ListWrapper>
   )
 }
