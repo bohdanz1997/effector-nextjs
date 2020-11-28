@@ -4,7 +4,6 @@ export const AddButton = styled.button`
   -webkit-appearance: none;
   border: none;
   background-color: rgba(0, 0, 0, 0.08);
-  text-decoration: underline;
   font-size: var(--font-size3);
   cursor: pointer;
   padding: var(--p2);

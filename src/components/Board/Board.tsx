@@ -33,7 +33,6 @@ export const Board: React.FC = () => {
 
 const Main = styled.main`
   height: 100vh;
-  background-color: var(--board-bg);
   padding: var(--p2) var(--p1);
 `
 
