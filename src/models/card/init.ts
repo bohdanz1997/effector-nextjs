@@ -6,13 +6,7 @@ import { boardClicked } from '../board'
 import { addCard, removeCardById, updateCard } from '../cards'
 import { $currentCard, resetCurrentId, setCurrentId } from './current'
 import { cardClicked } from './edit'
-import {
-  $hoveredId,
-  $title,
-  cardHovered,
-  cardLeaved,
-  titleChanged,
-} from './index'
+import { $title, titleChanged } from './index'
 
 forward({
   from: cardClicked,
@@ -27,8 +21,6 @@ forward({
 $title
   .on(titleChanged, (_, title) => title)
   .reset(addCard, updateCard, removeCardById, boardClicked)
-
-$hoveredId.on(cardHovered, (_, id) => id).reset(cardLeaved)
 
 sample({
   source: $currentCard,
