@@ -1,21 +1,18 @@
 import './current/init'
 import './add/init'
-import { combine, forward, guard, sample } from 'effector'
+import './edit/init'
+import { forward, sample } from 'effector'
 import { boardClicked } from '../board'
 import { addCard, removeCardById, updateCard } from '../cards'
 import { $currentCard, resetCurrentId, setCurrentId } from './current'
+import { cardClicked } from './edit'
 import {
   $hoveredId,
-  $isEditing,
   $title,
-  cardClicked,
   cardHovered,
   cardLeaved,
-  enterPressed,
   titleChanged,
 } from './index'
-
-$isEditing.on(cardClicked, () => true).reset(boardClicked, updateCard)
 
 forward({
   from: cardClicked,
@@ -39,20 +36,3 @@ sample({
   fn: (card) => card?.title || '',
   target: $title,
 })
-
-const $updateData = combine($currentCard, $title, (card, title) => ({
-  ...card,
-  title,
-}))
-
-sample({
-  source: $updateData,
-  clock: guard({
-    source: enterPressed,
-    filter: $isEditing.map(Boolean),
-  }),
-  target: updateCard,
-})
-
-// $isAdding.watch((v) => console.log('card adding', v))
-// $isEditing.watch((v) => console.log('card editing', v))
