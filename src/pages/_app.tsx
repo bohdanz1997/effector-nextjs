@@ -1,3 +1,4 @@
+import 'assets/styles/app.css'
 import 'models/init'
 import { AppProps } from 'next/app'
 import { ThemeProvider } from 'styled-components'

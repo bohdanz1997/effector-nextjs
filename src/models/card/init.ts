@@ -14,6 +14,9 @@ import {
   $title,
   titleChanged,
   $isAdding,
+  cardHovered,
+  cardLeaved,
+  $hoveredId,
 } from './index'
 
 $isAdding.on(addButtonClicked, () => true).reset(boardClicked, addCard)
@@ -26,6 +29,8 @@ $currentId
 $title
   .on(titleChanged, (_, title) => title)
   .reset(addCard, updateCard, removeCardById, boardClicked)
+
+$hoveredId.on(cardHovered, (_, id) => id).reset(cardLeaved)
 
 const defaultCard: Card = {
   id: 0,
