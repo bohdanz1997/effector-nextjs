@@ -1,11 +1,11 @@
 import { combine, guard, sample } from 'effector'
-import { addCard } from 'models/cards'
+import { uuid } from 'lib/uuid'
 import { boardClicked } from 'models/board'
 import { app } from 'models/app'
 import * as listModel from 'models/list'
-import { uuid } from 'lib/uuid'
+import { addCard } from 'models/cards'
+import { $title, enterPressed } from 'models/card/current'
 
-import { $title, enterPressed } from '../index'
 import { $isAdding, addButtonClicked } from './index'
 
 $isAdding.on(addButtonClicked, () => true).reset(boardClicked, addCard)
