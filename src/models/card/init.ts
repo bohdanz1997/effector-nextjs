@@ -1,17 +1,13 @@
 import './current/init'
+import './add/init'
 import { combine, forward, guard, sample } from 'effector'
-import { uuid } from 'lib/uuid'
 import { boardClicked } from '../board'
 import { addCard, removeCardById, updateCard } from '../cards'
-import * as listModel from '../list'
-import { app } from '../app'
-import { setCurrentId, $currentCard, resetCurrentId } from './current'
+import { $currentCard, resetCurrentId, setCurrentId } from './current'
 import {
   $hoveredId,
-  $isAdding,
   $isEditing,
   $title,
-  addButtonClicked,
   cardClicked,
   cardHovered,
   cardLeaved,
@@ -19,7 +15,6 @@ import {
   titleChanged,
 } from './index'
 
-$isAdding.on(addButtonClicked, () => true).reset(boardClicked, addCard)
 $isEditing.on(cardClicked, () => true).reset(boardClicked, updateCard)
 
 forward({
@@ -43,37 +38,6 @@ sample({
   clock: cardClicked,
   fn: (card) => card?.title || '',
   target: $title,
-})
-
-const addNewCard = app.createEvent<{
-  id: number
-  title: string
-  listId: number | null
-}>()
-
-const $createCardData = combine(
-  $title,
-  listModel.$currentId,
-  (title, listId) => ({
-    id: uuid(),
-    title,
-    listId,
-  }),
-)
-
-sample({
-  source: $createCardData,
-  clock: guard({
-    source: enterPressed,
-    filter: $isAdding.map(Boolean),
-  }),
-  target: addNewCard,
-})
-
-guard({
-  source: addNewCard,
-  filter: listModel.$currentId.map(Boolean),
-  target: addCard,
 })
 
 const $updateData = combine($currentCard, $title, (card, title) => ({
