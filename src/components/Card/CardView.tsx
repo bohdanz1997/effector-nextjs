@@ -9,7 +9,7 @@ import {
   cardHovered,
   cardLeaved,
 } from 'models/card'
-import { Card } from 'models/cards'
+import { Card, removeCardById } from 'models/cards'
 
 import { EditableTitle } from './EditableTitle'
 
@@ -25,6 +25,7 @@ export const CardView: React.FC<Props> = ({ children, card }) => {
     cardHovered,
     cardLeaved,
     cardClicked,
+    removeCardById,
   })
 
   const showActions = hoveredId === card.id
@@ -46,7 +47,9 @@ export const CardView: React.FC<Props> = ({ children, card }) => {
       </Title>
       {showActions && (
         <Actions>
-          <DeleteButton>Delete</DeleteButton>
+          <DeleteButton onClick={() => events.removeCardById(card.id)}>
+            Delete
+          </DeleteButton>
         </Actions>
       )}
       <Content>{children}</Content>
