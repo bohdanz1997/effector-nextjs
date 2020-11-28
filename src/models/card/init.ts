@@ -1,30 +1,36 @@
-import { combine, guard, sample } from 'effector'
+import './current/init'
+import { combine, forward, guard, sample } from 'effector'
 import { uuid } from 'lib/uuid'
 import { boardClicked } from '../board'
-import { $cards, addCard, Card, removeCardById, updateCard } from '../cards'
+import { addCard, removeCardById, updateCard } from '../cards'
 import * as listModel from '../list'
 import { app } from '../app'
+import { setCurrentId, $currentCard, resetCurrentId } from './current'
 import {
-  $currentId,
-  $isEditing,
-  addButtonClicked,
-  enterPressed,
-  setCurrentId,
-  cardClicked,
-  $title,
-  titleChanged,
+  $hoveredId,
   $isAdding,
+  $isEditing,
+  $title,
+  addButtonClicked,
+  cardClicked,
   cardHovered,
   cardLeaved,
-  $hoveredId,
+  enterPressed,
+  titleChanged,
 } from './index'
 
 $isAdding.on(addButtonClicked, () => true).reset(boardClicked, addCard)
 $isEditing.on(cardClicked, () => true).reset(boardClicked, updateCard)
 
-$currentId
-  .on([setCurrentId, cardClicked], (_, currentId) => currentId)
-  .reset(addCard, updateCard, removeCardById, boardClicked)
+forward({
+  from: cardClicked,
+  to: setCurrentId,
+})
+
+forward({
+  from: [addCard, updateCard, removeCardById, boardClicked],
+  to: resetCurrentId,
+})
 
 $title
   .on(titleChanged, (_, title) => title)
@@ -32,22 +38,10 @@ $title
 
 $hoveredId.on(cardHovered, (_, id) => id).reset(cardLeaved)
 
-const defaultCard: Card = {
-  id: 0,
-  title: '',
-  listId: 0,
-}
-
-const $currentCard = combine(
-  $cards,
-  $currentId,
-  (cards, id) => cards.find((card) => card.id === id) || defaultCard,
-)
-
 sample({
   source: $currentCard,
   clock: cardClicked,
-  fn: (card) => card.title,
+  fn: (card) => card?.title || '',
   target: $title,
 })
 
@@ -96,6 +90,5 @@ sample({
   target: updateCard,
 })
 
-// $currentId.watch((v) => console.log('card currentID', v))
 // $isAdding.watch((v) => console.log('card adding', v))
 // $isEditing.watch((v) => console.log('card editing', v))
