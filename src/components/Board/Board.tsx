@@ -2,7 +2,7 @@ import * as React from 'react'
 import styled from 'styled-components'
 import { useEvent } from 'effector-react/ssr'
 import { boardClicked } from 'models/board'
-import { ListsWithCards, AddList } from '../List'
+import { AddList, ListsWithCards } from '../List'
 
 export const Board: React.FC = () => {
   const events = useEvent({

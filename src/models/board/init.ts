@@ -1,12 +1,17 @@
 import { forward } from 'effector'
 
-import { $cards } from '../cards'
 import * as cardModel from '../card'
 import * as listModel from '../list'
+import { fetchCardsFx } from '../cards'
+import { fetchListsFx } from '../lists'
+import { initializeBoard } from './index'
 
 forward({
   from: cardModel.addButtonClicked,
   to: listModel.setCurrentId,
 })
 
-$cards.watch((v) => console.log('cards', v))
+forward({
+  from: initializeBoard,
+  to: [fetchCardsFx, fetchListsFx],
+})

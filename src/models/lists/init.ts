@@ -1,7 +1,22 @@
-import { $lists, addList, removeListById, setLists, updateList } from './index'
+import { request } from '../request'
+import {
+  $lists,
+  addList,
+  fetchListsFx,
+  removeListById,
+  setLists,
+  updateList,
+} from './index'
+
+fetchListsFx.use(() =>
+  request({
+    path: '/lists',
+    method: 'GET',
+  }),
+)
 
 $lists
-  .on(setLists, (_, lists) => lists)
+  .on([setLists, fetchListsFx.doneData], (_, lists) => lists)
   .on(addList, (lists, list) => lists.concat(list))
   .on(updateList, (lists, newList) =>
     lists.map((list) => (list.id === newList.id ? newList : list)),

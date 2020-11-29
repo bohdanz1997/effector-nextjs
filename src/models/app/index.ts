@@ -3,4 +3,6 @@ import { createGate } from 'effector-react'
 
 export const app = createDomain()
 
-export const AppGate = createGate()
+export const AppGate = createGate({
+  domain: app,
+})

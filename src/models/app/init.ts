@@ -1,11 +1,4 @@
-import { forward } from 'effector'
-
-import { app, AppGate } from './index'
-
-forward({
-  from: AppGate.open,
-  to: [],
-})
+import { app } from './index'
 
 app.onCreateEffect((fx) => {
   fx.failData.watch((error) => {

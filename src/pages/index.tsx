@@ -1,12 +1,13 @@
 import React from 'react'
 import { GetServerSideProps } from 'next'
-import { fork, serialize } from 'effector/fork'
+import { allSettled, fork, serialize } from 'effector/fork'
 import { app } from 'models/app'
 import { Board } from 'components/Board/Board'
+import { initializeBoard } from '../models/board'
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const scope = fork(app)
-  // await allSettled(model.fetchUserFx, { scope })
+  await allSettled(initializeBoard, { scope })
 
   return {
     props: {
