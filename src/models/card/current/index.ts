@@ -15,5 +15,9 @@ export const resetTitle = app.createEvent<void>()
 
 export const $currentId = app.createStore<number>(0)
 export const $hoveredId = app.createStore<number | null>(null)
-export const $currentCard = app.createStore<Card | null>(null)
+export const $currentCard = app.createStore<Card>({
+  id: 0,
+  listId: 0,
+  title: '',
+})
 export const $title = app.createStore<string>('')
