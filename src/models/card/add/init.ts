@@ -2,7 +2,7 @@ import { combine, guard, sample } from 'effector'
 import { uuid } from 'lib/uuid'
 import { boardClicked } from 'models/board'
 import * as listModel from 'models/list'
-import { addCard } from 'models/cards'
+import { addCard, createCardFx } from 'models/cards'
 import { $title, enterPressed } from 'models/card/current'
 
 import { $isAdding, addButtonClicked } from './index'
@@ -13,7 +13,7 @@ const $createCardData = combine(
   $title,
   listModel.$currentId,
   (title, listId) => ({
-    id: uuid(),
+    // id: uuid(),
     title,
     listId: listId || 0,
   }),
@@ -30,5 +30,5 @@ const submitClicked = guard({
 sample({
   source: $createCardData,
   clock: submitClicked,
-  target: addCard,
+  target: createCardFx,
 })

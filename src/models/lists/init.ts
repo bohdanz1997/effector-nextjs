@@ -8,12 +8,7 @@ import {
   updateList,
 } from './index'
 
-fetchListsFx.use(() =>
-  request({
-    path: '/lists',
-    method: 'GET',
-  }),
-)
+fetchListsFx.use(() => request('/lists', 'GET'))
 
 $lists
   .on([setLists, fetchListsFx.doneData], (_, lists) => lists)

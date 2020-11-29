@@ -1,6 +1,6 @@
 import { combine, guard, sample } from 'effector'
 import { boardClicked } from 'models/board'
-import { updateCard } from 'models/cards'
+import { updateCard, updateCardFx } from 'models/cards'
 import { $currentCard, $title, enterPressed } from 'models/card/current'
 
 import { $isEditing, cardClicked } from './index'
@@ -18,5 +18,5 @@ sample({
     source: enterPressed,
     filter: $isEditing.map(Boolean),
   }),
-  target: updateCard,
+  target: updateCardFx,
 })

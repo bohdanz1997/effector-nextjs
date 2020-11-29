@@ -3,3 +3,10 @@ export type Card = {
   title: string
   listId: number
 }
+
+export type CardCreateParams = {
+  title: string
+  listId: number
+}
+
+export type CardUpdateParams = CardCreateParams & { id: number }

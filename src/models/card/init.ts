@@ -3,7 +3,7 @@ import './add/init'
 import './edit/init'
 import { forward, sample } from 'effector'
 import { boardClicked } from '../board'
-import { addCard, removeCardById, updateCard } from '../cards'
+import { addCard, removeCard, updateCard } from '../cards'
 import {
   $currentCard,
   resetCurrentId,
@@ -19,12 +19,12 @@ forward({
 })
 
 forward({
-  from: [addCard, updateCard, removeCardById, boardClicked],
+  from: [addCard, updateCard, removeCard, boardClicked],
   to: resetCurrentId,
 })
 
 forward({
-  from: [addCard, updateCard, removeCardById, boardClicked],
+  from: [addCard, updateCard, removeCard, boardClicked],
   to: resetTitle,
 })
 
