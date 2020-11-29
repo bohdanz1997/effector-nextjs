@@ -1,11 +1,9 @@
-import { combine, forward } from 'effector'
+import { combine } from 'effector'
 import { uuid } from 'lib/uuid'
 
 import { app } from '../app'
 import { $lists, setLists } from '../lists'
 import { $cards, setCards } from '../cards'
-import * as cardModel from '../card'
-import * as listModel from '../list'
 
 export const boardClicked = app.createEvent()
 
@@ -15,11 +13,6 @@ export const $listsWithCards = combine($lists, $cards, (lists, cards) =>
     cards: cards.filter((card) => list.id === card.listId),
   })),
 )
-
-forward({
-  from: cardModel.addButtonClicked,
-  to: listModel.setCurrentId,
-})
 
 // initialize
 const one = uuid()
@@ -34,5 +27,3 @@ setCards([
   { id: uuid(), title: 'First', listId: one },
   { id: uuid(), title: 'Second', listId: two },
 ])
-
-$cards.watch((v) => console.log('cards', v))

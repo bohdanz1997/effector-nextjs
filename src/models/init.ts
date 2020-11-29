@@ -1,4 +1,5 @@
 import './app/init'
+import './board/init'
 import './cards/init'
 import './lists/init'
 import './list/init'
