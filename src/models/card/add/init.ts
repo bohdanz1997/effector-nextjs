@@ -1,5 +1,4 @@
 import { combine, guard, sample } from 'effector'
-import { uuid } from 'lib/uuid'
 import { boardClicked } from 'models/board'
 import * as listModel from 'models/list'
 import { addCard, createCardFx } from 'models/cards'
@@ -13,7 +12,6 @@ const $createCardData = combine(
   $title,
   listModel.$currentId,
   (title, listId) => ({
-    // id: uuid(),
     title,
     listId: listId || 0,
   }),

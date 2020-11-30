@@ -2,7 +2,7 @@ export {
   $currentId,
   $hoveredId,
   cardHovered,
-  cardLeaved,
+  cardLeft,
   $title,
   enterPressed,
   keyPressed,

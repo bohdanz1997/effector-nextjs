@@ -1,7 +1,13 @@
 import { combine, guard, sample } from 'effector'
-import { uuid } from 'lib/uuid'
 
-import { $lists, addList, removeListById, updateList } from '../lists'
+import {
+  $lists,
+  addList,
+  createListFx,
+  removeList,
+  updateList,
+  updateListFx,
+} from '../lists'
 import { boardClicked } from '../board'
 import * as cardsModel from '../cards'
 import {
@@ -15,6 +21,9 @@ import {
   setCurrentId,
   titleChanged,
   listClicked,
+  $hoveredId,
+  listHovered,
+  listLeft,
 } from './index'
 
 $mode
@@ -24,11 +33,13 @@ $mode
 
 $currentId
   .on([setCurrentId, listClicked], (_, currentId) => currentId)
-  .reset(addList, updateList, removeListById, boardClicked, cardsModel.addCard)
+  .reset(addList, updateList, removeList, boardClicked, cardsModel.addCard)
+
+$hoveredId.on(listHovered, (_, id) => id).reset(listLeft)
 
 $title
   .on(titleChanged, (_, title) => title)
-  .reset(addList, updateList, removeListById, boardClicked)
+  .reset(addList, updateList, removeList, boardClicked)
 
 const $currentList = combine(
   $lists,
@@ -43,17 +54,16 @@ sample({
   target: $title,
 })
 
+const addClicked = guard({
+  source: enterPressed,
+  filter: $isAdding,
+})
+
 sample({
   source: $title,
-  clock: guard({
-    source: enterPressed,
-    filter: $isAdding,
-  }),
-  fn: (title) => ({
-    id: uuid(),
-    title,
-  }),
-  target: addList,
+  clock: addClicked,
+  fn: (title) => ({ title }),
+  target: createListFx,
 })
 
 const $updateData = combine({
@@ -61,14 +71,18 @@ const $updateData = combine({
   title: $title,
 })
 
-sample({
-  source: $updateData,
-  clock: guard({
-    source: enterPressed,
-    filter: $isEditing,
-  }),
-  target: updateList,
+const editClicked = guard({
+  source: enterPressed,
+  filter: $isEditing,
 })
 
-// $currentId.watch((v) => console.log('list currentID', v))
-// $isEditing.watch((v) => console.log('list editing', v))
+sample({
+  source: $updateData,
+  clock: editClicked,
+  // TODO: change so updateData.id will be not null
+  fn: ({ id, title }) => ({
+    id: id || 0,
+    title,
+  }),
+  target: updateListFx,
+})

@@ -13,16 +13,8 @@ import {
 } from './index'
 
 fetchCardsFx.use(() => request('/cards', 'GET'))
-createCardFx.use((card) =>
-  request('/cards', 'POST', {
-    data: card,
-  }),
-)
-updateCardFx.use((card) =>
-  request(`/cards/${card.id}`, 'PUT', {
-    data: card,
-  }),
-)
+createCardFx.use((card) => request('/cards', 'POST', { data: card }))
+updateCardFx.use((card) => request(`/cards/${card.id}`, 'PUT', { data: card }))
 removeCardFx.use((id) => request(`/cards/${id}`, 'DELETE'))
 
 $cards

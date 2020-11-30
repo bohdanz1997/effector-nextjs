@@ -10,7 +10,7 @@ import {
 
 import { AddButton } from '../Button'
 import { Input } from '../Input'
-import { ListWrapper } from './List'
+import { ListWrapper } from './ListView'
 
 export const AddList = () => {
   const events = useEvent({

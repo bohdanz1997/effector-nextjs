@@ -7,10 +7,11 @@ import {
   $isEditing,
   cardClicked,
   cardHovered,
-  cardLeaved,
+  cardLeft,
 } from 'models/card'
 import { Card, removeCardFx } from 'models/cards'
 
+import { DeleteButton } from '../Button'
 import { EditableTitle } from './EditableTitle'
 
 type Props = {
@@ -23,7 +24,7 @@ export const CardView: React.FC<Props> = ({ children, card }) => {
   const currentId = useStore($currentId)
   const events = useEvent({
     cardHovered,
-    cardLeaved,
+    cardLeft,
     cardClicked,
     removeCardFx,
   })
@@ -34,7 +35,7 @@ export const CardView: React.FC<Props> = ({ children, card }) => {
   return (
     <Container
       onMouseEnter={() => events.cardHovered(card.id)}
-      onMouseLeave={() => events.cardLeaved(card.id)}
+      onMouseLeave={() => events.cardLeft(card.id)}
     >
       <Title>
         {showEditableField ? (
@@ -76,20 +77,6 @@ const Actions = styled.div`
   right: 0;
   top: 0;
   padding: var(--p2);
-`
-
-const DeleteButton = styled.button`
-  -webkit-appearance: none;
-  border: none;
-  background-color: transparent;
-  font-size: var(--font-size2);
-  cursor: pointer;
-  padding: var(--p2);
-  border-radius: var(--border-radius);
-
-  &:hover {
-    background-color: var(--dark1);
-  }
 `
 
 const Title = styled.div`

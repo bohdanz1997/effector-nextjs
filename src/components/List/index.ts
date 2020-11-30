@@ -1,3 +1,3 @@
 export { AddList } from './AddList'
-export { List } from './List'
+export { ListView } from './ListView'
 export { ListsWithCards } from './ListsWithCards'
