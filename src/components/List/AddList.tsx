@@ -4,19 +4,19 @@ import {
   $isAdding,
   $title,
   addButtonClicked,
-  titleInputChanged,
-  titleInputKeyPressed,
+  titleChanged,
+  keyPressed,
 } from 'models/list'
 
 import { AddButton } from '../Button'
-import { Input } from '../Input'
+import { EditableInput } from '../Input'
 import { ListWrapper } from './ListView'
 
 export const AddList = () => {
   const events = useEvent({
     addButtonClicked,
-    titleInputChanged,
-    titleInputKeyPressed,
+    titleChanged,
+    keyPressed,
   })
   const isAdding = useStore($isAdding)
   const title = useStore($title)
@@ -24,12 +24,10 @@ export const AddList = () => {
   return (
     <ListWrapper>
       {isAdding ? (
-        <Input
-          autoFocus
-          type="text"
+        <EditableInput
           value={title}
-          onChange={events.titleInputChanged}
-          onKeyPress={events.titleInputKeyPressed}
+          onChange={events.titleChanged}
+          onKeyPress={events.keyPressed}
         />
       ) : (
         <AddButton onClick={() => events.addButtonClicked()}>

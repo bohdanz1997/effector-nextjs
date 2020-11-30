@@ -11,7 +11,7 @@ import {
 } from 'models/card'
 
 import { AddButton } from '../Button'
-import { Input } from '../Input'
+import { EditableInput } from '../Input'
 
 type Props = {
   listId: number
@@ -32,12 +32,10 @@ export const AddCard: React.FC<Props> = ({ listId }) => {
   return (
     <Container>
       {showInput ? (
-        <Input
-          autoFocus
-          type="text"
+        <EditableInput
           value={title}
-          onChange={(e) => events.titleChanged(e.target.value)}
-          onKeyPress={(e) => events.keyPressed(e.key)}
+          onChange={events.titleChanged}
+          onKeyPress={events.keyPressed}
         />
       ) : (
         <AddButton onClick={() => events.addButtonClicked(listId)}>

@@ -29,6 +29,7 @@ export const ListView: React.FC<Props> = ({ children, list }) => {
     listClicked,
     removeListFx,
   })
+
   const showActions = hoveredId === list.id
   const showEditableField = isEditing && currentId === list.id
 
