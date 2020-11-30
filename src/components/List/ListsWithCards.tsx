@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useList } from 'effector-react/ssr'
+import { useList } from 'effector-react'
 import { $listsWithCards } from 'models/board'
 
 import { CardView, AddCard } from '../Card'

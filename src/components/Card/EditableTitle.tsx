@@ -1,5 +1,5 @@
 import React from 'react'
-import { useEvent, useStore } from 'effector-react/ssr'
+import { useEvent, useStore } from 'effector-react'
 import { $title, keyPressed, titleChanged } from 'models/card'
 
 import { Input } from '../Input'

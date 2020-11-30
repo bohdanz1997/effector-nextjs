@@ -1,8 +1,9 @@
 import { createDomain } from 'effector'
-import { createGate } from 'effector-react'
+// TODO: createGate is not exported from effector-react/ssr
+// import { createGate } from 'effector-react'
 
 export const app = createDomain()
 
-export const AppGate = createGate({
-  domain: app,
-})
+// export const AppGate = createGate({
+//   domain: app,
+// })

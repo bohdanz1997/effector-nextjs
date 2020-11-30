@@ -1,6 +1,6 @@
 import * as React from 'react'
 import styled from 'styled-components'
-import { useEvent } from 'effector-react/ssr'
+import { useEvent } from 'effector-react'
 import { boardClicked } from 'models/board'
 import { AddList, ListsWithCards } from '../List'
 

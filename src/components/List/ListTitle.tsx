@@ -1,5 +1,5 @@
 import React from 'react'
-import { useEvent, useStore } from 'effector-react/ssr'
+import { useEvent, useStore } from 'effector-react'
 import {
   $currentId,
   $isEditing,

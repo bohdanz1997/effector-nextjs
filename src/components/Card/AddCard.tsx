@@ -1,6 +1,6 @@
 import * as React from 'react'
 import styled from 'styled-components'
-import { useEvent, useStore } from 'effector-react/ssr'
+import { useEvent, useStore } from 'effector-react'
 import * as listModel from 'models/list'
 import {
   $title,
