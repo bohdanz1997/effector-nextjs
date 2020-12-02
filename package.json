@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "array-move": "^3.0.1",
     "axios": "^0.21.0",
     "effector": "^21.7.5",
     "effector-react": "^21.1.0",

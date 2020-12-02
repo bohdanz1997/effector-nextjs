@@ -92,6 +92,7 @@ export const Title = styled.div`
   font-weight: bold;
   cursor: pointer;
   max-width: 75%;
+  min-height: 40px;
 `
 
 export const TitleText = styled.div`

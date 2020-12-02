@@ -10,6 +10,7 @@ import {
   cardLeft,
 } from 'models/card'
 import { Card, removeCardFx } from 'models/cards'
+import { targetClicked, targetDropped } from 'models/dragdrop'
 
 import { DeleteButton } from '../Button'
 import { EditableTitle } from './EditableTitle'
@@ -27,6 +28,7 @@ export const CardView: React.FC<Props> = ({ children, card }) => {
     cardLeft,
     cardClicked,
     removeCardFx,
+    targetClicked,
   })
 
   const showActions = hoveredId === card.id
@@ -36,13 +38,31 @@ export const CardView: React.FC<Props> = ({ children, card }) => {
     <Container
       onMouseEnter={() => events.cardHovered(card.id)}
       onMouseLeave={() => events.cardLeft(card.id)}
+      onMouseDown={(event) => {
+        const rect = event.currentTarget.getBoundingClientRect()
+        const offset = {
+          x: event.clientX - rect.left,
+          y: event.clientY - rect.top,
+        }
+        const position = {
+          x: event.clientX,
+          y: event.clientY,
+        }
+
+        events.targetClicked({
+          id: card.id,
+          offset,
+          position,
+        })
+      }}
     >
       <Title>
         {showEditableField ? (
           <EditableTitle />
         ) : (
-          <TitleText onClick={() => events.cardClicked(card.id)}>
-            {card.title}
+          // <TitleText onClick={() => events.cardClicked(card.id)}>
+          <TitleText>
+            #{card.id} {card.title}
           </TitleText>
         )}
       </Title>
@@ -57,6 +77,15 @@ export const CardView: React.FC<Props> = ({ children, card }) => {
     </Container>
   )
 }
+
+export const MockCardView = ({ title }: { title: string }) => (
+  <Container>
+    <Title>
+      <TitleText>{title}</TitleText>
+    </Title>
+    <Content />
+  </Container>
+)
 
 const Container = styled.div`
   position: relative;
@@ -85,6 +114,7 @@ const Title = styled.div`
   padding: var(--p2);
   font-size: var(--font-size4);
   max-width: 75%;
+  min-height: 40px;
 `
 
 const TitleText = styled.div`
