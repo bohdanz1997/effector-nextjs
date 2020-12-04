@@ -14,6 +14,4 @@ set -e
 
 # Pull docker image to the server
 ssh-keyscan -H 54.174.101.216 >> ~/.ssh/known_hosts
-cat ~/.ssh/config
-cat ~/.ssh/id_rsa_9247fa619bde52d7d1be5d8db4feb988
 ssh -vvv ubuntu@54.174.101.216 "cd /home/ubuntu/app; git pull origin master && ./pull-and-up-images.sh"

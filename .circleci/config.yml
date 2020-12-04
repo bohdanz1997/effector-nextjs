@@ -36,7 +36,7 @@ jobs:
           version: 19.03.13
       - add_ssh_keys:
           fingerprints:
-            - "92:47:fa:61:9b:de:52:d7:d1:be:5d:8d:b4:fe:b9:88"
+            - "5a:c0:e8:26:a8:ca:e7:64:ce:5d:ff:15:80:30:89:4d"
       - run:
           name: deploy
           command: chmod +x ./deploy.sh && ./deploy.sh
