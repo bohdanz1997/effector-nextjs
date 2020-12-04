@@ -13,5 +13,5 @@ set -e
 #docker push "$REACT_IMAGE":"$APP_VERSION_TAG"
 
 # Pull docker image to the server
-ssh-keyscan -H "$SSH_SERVER" >> ~/.ssh/known_hosts
+ssh-keyscan -H 54.174.101.216 >> ~/.ssh/known_hosts
 ssh -vvv ubuntu@54.174.101.216 "cd /home/ubuntu/app; git pull origin master && ./pull-and-up-images.sh"
