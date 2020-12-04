@@ -3,7 +3,7 @@ version: '3.7'
 services:
   react:
     container_name: trellio_react
-    image: bogdanz/trellio-frontend:latest
+    image: bogdanz/trellio-react:latest
     restart: unless-stopped
     working_dir: /usr/src/app
     ports:
