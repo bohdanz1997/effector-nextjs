@@ -30,16 +30,16 @@ export const request = async <T>(
 export const requestInternal = async <T>({
   path,
   method,
-  query,
-  body,
+  params,
+  data,
   headers,
   cookies,
 }: Request): Promise<T> => {
   const response = await axios({
     url: `${API_URL}${path}`,
     method,
-    params: query,
-    data: body,
+    params,
+    data,
     headers,
   })
 

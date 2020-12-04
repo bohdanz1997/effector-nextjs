@@ -1,0 +1,42 @@
+version: 2.1
+
+workflows:
+  build_and_deploy:
+    jobs:
+      - lint_and_build
+      - deploy:
+          requires:
+            - lint_and_build
+
+jobs:
+  lint_and_build:
+    docker:
+      - image: circleci/node:14.15.1
+    steps:
+      - checkout
+      - run:
+          name: install
+          command: yarn
+      - run:
+          name: lint
+          command: yarn lint
+      - run:
+          name: test
+          command: yarn test
+  deploy:
+    docker:
+      - image: circleci/python:3.8.5
+        auth:
+          username: $DOCKERHUB_USER
+          password: $DOCKERHUB_PASSWORD
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 19.03.13
+      - add_ssh_keys:
+          fingerprints:
+            - "5a:c0:e8:26:a8:ca:e7:64:ce:5d:ff:15:80:30:89:4d"
+      - run:
+          name: deploy
+          command: chmod +x ./deploy.sh && ./deploy.sh
+
