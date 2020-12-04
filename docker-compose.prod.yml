@@ -7,7 +7,7 @@ services:
     restart: unless-stopped
     working_dir: /usr/src/app
     ports:
-      - 4000:3000
+      - 80:3000
     networks:
       - trellio
 
