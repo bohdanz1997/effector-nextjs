@@ -6,10 +6,10 @@ import { Normalize } from 'styled-normalize'
 import { Provider as EffectorProvider } from 'effector-react/ssr'
 import { Domain } from 'effector'
 import { fork, Scope, serialize } from 'effector/fork'
+
+import { isBrowser } from 'lib/ssr'
 import { app } from 'models/app'
 import { GlobalStyles, theme } from 'components/global-styles'
-
-const isBrowser = () => typeof window !== 'undefined'
 
 let currentScope: Scope
 let scope: Scope
