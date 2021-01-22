@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import { useEvent } from 'effector-react'
 import { boardClicked } from 'models/board'
 import { AddList, ListsWithCards } from '../List'
+import { Button, ButtonGroup, MenuButton } from '../Button'
+import { ContextMenu } from '../ContextMenu/ContextMenu'
 
 export const Board: React.FC = () => {
   const events = useEvent({
@@ -19,6 +21,14 @@ export const Board: React.FC = () => {
         }
       }}
     >
+      <Navbar>
+        <ButtonGroup>
+          <Button>Foo action</Button>
+          <Button>Foo action</Button>
+          <Button>Foo action</Button>
+        </ButtonGroup>
+        <ContextMenu />
+      </Navbar>
       <Container>
         <ListsWithCards />
         <AddList />
@@ -35,4 +45,12 @@ const Main = styled.main`
 const Container = styled.div`
   display: flex;
   flex-direction: row;
+`
+
+const Navbar = styled.div`
+  display: flex;
+  position: relative;
+  align-items: center;
+  margin: 0 var(--p1) var(--p2);
+  height: 40px;
 `

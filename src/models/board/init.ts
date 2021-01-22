@@ -1,3 +1,4 @@
+import './menu/init'
 import { forward } from 'effector'
 
 import * as cardModel from '../card'
