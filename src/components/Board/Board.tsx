@@ -1,6 +1,8 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import { useEvent } from 'effector-react'
+import * as Reakit from 'reakit'
+import { useDialogState } from 'reakit'
 import { boardClicked } from 'models/board'
 import { AddList, ListsWithCards } from '../List'
 import { Button, ButtonGroup, MenuButton } from '../Button'
@@ -11,6 +13,7 @@ export const Board: React.FC = () => {
     boardClicked,
   })
   const mainRef = React.useRef<HTMLDivElement>(null)
+  const dialog = useDialogState()
 
   return (
     <Main
@@ -23,6 +26,17 @@ export const Board: React.FC = () => {
     >
       <Navbar>
         <ButtonGroup>
+          <Reakit.Button disabled as={Button} focusable>
+            Reakit
+          </Reakit.Button>
+
+          <Reakit.DialogDisclosure {...dialog}>
+            Open Dialog
+          </Reakit.DialogDisclosure>
+          <Reakit.DialogBackdrop {...dialog}>
+            <Reakit.Dialog {...dialog}>Welcome Dialog</Reakit.Dialog>
+          </Reakit.DialogBackdrop>
+
           <Button>Foo action</Button>
           <Button>Foo action</Button>
           <Button>Foo action</Button>
